@@ -1,0 +1,5 @@
+# fazer outra lista com idades + 1 em uma linha
+idades_no_ano_que_vem = [idade+1 for idade in idades]
+
+# fazendo outra lista apenas com numeros maiores que 21
+[(idade) for idade in idades if idade > 21]
