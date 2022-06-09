@@ -4,6 +4,8 @@ class MinhaAgenda:
         self.endereco = endereco
         self.email = email
         self.numero_contato = numero_contato
+        self.verifica_cpf()
+        self.verifica_email()
     
     @property
     def nome(self):
@@ -11,6 +13,24 @@ class MinhaAgenda:
     @nome.setter
     def nome(self,novo_nome):
         self._nome = novo_nome
+    
+    def verifica_cpf(self):
+        padrao = re.compile("[0-9]{3}[.]?[0-9]{3}[.]?[0-9]{3}[-]?[0-9]{2}")
+        busca = padrao.search(self._cpf)
+        if busca:
+            cpf = busca.group()
+            print(f"CPF nos conformes {cpf}")
+        else:
+            print("CPF esta errado")
+    
+    def verifica_email(self):
+        padrao = re.compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.com+$)")
+        busca = padrao.search(self.email)
+        if busca:
+            email = busca.group()
+            print(f"Email nos conformes {email}")
+        else:
+            print("Voce digitou o email errado")
     
     def __str__(self):
         return f" Nome: {self._nome} \n Endereço: {self.endereco} \n Email: {self.email} \n Numero de Contato: {self.numero_contato}"
