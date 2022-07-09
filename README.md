@@ -29,10 +29,10 @@ No vs code no terminal bash com o ambiente virtual ativado faça
 django-admin startproject "nome do projeto"
 ```
 
-No arquivo settings.py mudar o timezone para America/Fortaleza e a linguagem para pt-br
+<p><br>No arquivo settings.py mudar o timezone para America/Fortaleza e a linguagem para pt-br<br></p>
+<p><br>Subindo servidor django sempre verificando se o ambiente virtual esta ativado</p>
 
 ```bash
-# Subindo servidor django sempre verificando se o ambiente virtual esta ativado
 python manage.py runserver
 ```
 
