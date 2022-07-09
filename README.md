@@ -114,3 +114,98 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'nome do projeto/static')
 ]
 ```
+<p>Na pasta do projeto criar uma pasta com nome de static coloque todos os arquivos sem ser o index ou qualquer outro html na pasta static</p>
+<p>No terminal com o ambiente virtual ligado digite</p>
+
+```bash
+python manage.py collectstatic
+```
+
+<p>Depois coloque os arquivos html dentro da pasta templates</p>
+<p>No arquivo html bem no inicio coloque {% load static %} para carregar os arquivos estaticos do arquivo, depois coloque {% static '' %} em tudo que fizer parte da pasta static dentro do html </p>
+
+```html
+#EXEMPLO
+{% load static %}
+ <!-- Preloader -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+        <img src="{% static 'img/core-img/pizza.png' %}" alt="">
+    </div>
+```
+<p>Crie outra função no arquivo views.py que renderize outra pagina se precisar</p>
+
+```python
+#EXEMPLO
+def receita(request):
+    return render(request, 'receita.html')
+```
+<p>Adcionar path da outra pagina no arquivo urls.py</p>
+
+```python
+#EXEMPLO
+path('', views.receita, name='receita'),
+```
+<p>Se precisar e se tiver algum codigo repitido entre as paginas fazer um arquivo base html e usar o {% block content%} e {% endblock %}</p>
+
+```html
+#EXEMPLO
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Título -->
+    <title>Alura Receitas</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static 'site.css' %}">
+
+</head>
+
+<body>
+    {% block content %} {% endblock %}
+</body>
+```
+
+<p>E extender onde fica o codigo repetido {% extends 'base.html'%} nao esquecer de botar o block e o endblock no inicio e no final 	da pagina onde voce vai extender o arquivo base</p>
+
+```html
+#EXEMPLO
+{% extends 'base.html'%}
+{% load static %}
+{% block content%}
+    <!-- Preloader -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+        <img src="{% static 'img/core-img/pizza.png' %}" alt="">
+    </div>
+
+    <!-- Search Wrapper -->
+    <div class="search-wrapper">
+        <!-- Close Btn -->
+        <div class="close-btn"><i class="fa fa-times" aria-hidden="true"></i></div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <form action="#" method="post">
+                        <input type="search" name="search" placeholder="O que está procurando...">
+                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+```
